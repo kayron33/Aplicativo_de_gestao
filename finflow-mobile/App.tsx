@@ -7,6 +7,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { enableScreens } from "react-native-screens";
 enableScreens(true);
 
+// Storage + Notifications
 import { load, save } from "./src/storage";
 import { requestNotificationPermission } from "./src/notifications";
 
@@ -17,12 +18,13 @@ import ChequeEspecialScreen from "./src/screens/ChequeEspecialScreen";
 import DividasScreen from "./src/screens/DividasScreen";
 import MetasScreen from "./src/screens/MetasScreen";
 import ExtrasScreen from "./src/screens/ExtrasScreen";
+import SalaryScreen from "./src/screens/SalaryScreen";
 
 const Tab = createBottomTabNavigator();
 
 export default function App() {
   const [data, setData] = useState({
-    // 💼 Receita fixa
+    // 💼 Salário
     salary: 3500,
     payday: 5,
 
@@ -45,12 +47,12 @@ export default function App() {
     extras: [],
   });
 
-  // 🔔 Permissão de notificação (1x)
+  // 🔔 Permissão de notificação (uma vez)
   useEffect(() => {
     requestNotificationPermission();
   }, []);
 
-  // 🔹 Carrega dados salvos (merge seguro)
+  // 🔹 Carregar dados salvos
   useEffect(() => {
     load().then((d) => {
       if (d) {
@@ -64,7 +66,7 @@ export default function App() {
     });
   }, []);
 
-  // 🔹 Salva automaticamente ao mudar
+  // 🔹 Salvar automaticamente
   useEffect(() => {
     save(data);
   }, [data]);
@@ -88,6 +90,7 @@ export default function App() {
             const icons: Record<string, keyof typeof Ionicons.glyphMap> = {
               Resumo: "stats-chart",
               Calendário: "calendar",
+              Salário: "cash-outline",
               Cheque: "card",
               Dívidas: "list",
               Metas: "trophy",
@@ -110,6 +113,10 @@ export default function App() {
 
         <Tab.Screen name="Calendário">
           {() => <CalendarioScreen data={data} />}
+        </Tab.Screen>
+
+        <Tab.Screen name="Salário">
+          {() => <SalaryScreen data={data} setData={setData} />}
         </Tab.Screen>
 
         <Tab.Screen name="Cheque">

@@ -7,6 +7,11 @@
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "dark",
     "newArchEnabled": true,
+    "updates": {
+      "enabled": true,
+      "fallbackToCacheTimeout": 0,
+      "url": "https://u.expo.dev/a05dd99f-9233-437a-ab83-88f2960014d3"
+    },
     "splash": {
       "image": "./assets/icon.png",
       "resizeMode": "contain",
@@ -36,6 +41,9 @@
         "projectId": "a05dd99f-9233-437a-ab83-88f2960014d3"
       }
     },
-    "owner": "kayron23"
+    "owner": "kayron23",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    }
   }
 }
